@@ -41,7 +41,31 @@ explore: monthly_visits {}
 
 explore: detailed_climate {}
 
-explore: parks {}
+explore: parks {
+  join: guides {
+    type: left_outer
+    sql_on: ${parks.park_code} = ${guides.park} ;;
+    relationship: many_to_one
+  }
+
+  join: monthly_visits {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${monthly_visits.park} ;;
+    relationship: many_to_one
+  }
+
+  join: climbing {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${climbing.park} ;;
+    relationship: many_to_one
+  }
+
+  join: detailed_visits {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${detailed_visits.park} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: trails {}
 
