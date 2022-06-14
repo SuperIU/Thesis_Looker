@@ -27,6 +27,7 @@ view: guides {
   }
 
   dimension: park {
+    primary_key: yes
     type: string
     sql: ${TABLE}.park ;;
   }

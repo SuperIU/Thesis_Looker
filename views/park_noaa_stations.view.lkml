@@ -41,6 +41,7 @@ view: park_noaa_stations {
   }
 
   dimension: station_id {
+    primary_key: yes
     type: string
     sql: ${TABLE}.station_id ;;
   }

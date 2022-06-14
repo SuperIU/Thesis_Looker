@@ -12,6 +12,7 @@ view: monthly_visits {
   # This dimension will be called "Backcountry Campers" in Explore.
 
   dimension: backcountry_campers {
+    primary_key: yes
     type: number
     sql: ${TABLE}.backcountry_campers ;;
   }
@@ -28,6 +29,7 @@ view: monthly_visits {
   measure: average_backcountry_campers {
     type: average
     sql: ${backcountry_campers} ;;
+    value_format: "#,##0"
   }
 
   dimension: concession_camping {

@@ -12,6 +12,7 @@ view: detailed_visits {
   # This dimension will be called "Backcountry Campers" in Explore.
 
   dimension: backcountry_campers {
+    primary_key: yes
     type: number
     sql: ${TABLE}.backcountry_campers ;;
   }

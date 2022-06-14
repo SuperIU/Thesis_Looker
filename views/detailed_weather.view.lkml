@@ -12,6 +12,7 @@ view: detailed_weather {
   # This dimension will be called "Count Dewp" in Explore.
 
   dimension: count_dewp {
+    primary_key: yes
     type: number
     description: "Number of observations used in calculating mean dew point"
     sql: ${TABLE}.count_dewp ;;

@@ -59,7 +59,7 @@ view: park_species {
     html:
     {{ linked_value }}
     <a href="https://www.google.com/search?q={{ value }}" target="_new">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" height=15 width=15> </a> ;;
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" height=15 width=12> </a> ;;
   }
 
   dimension: record_status {
@@ -97,5 +97,35 @@ view: park_species {
   measure: count {
     type: count
     drill_fields: [park_name, scientific_name]
+  }
+
+# CUSTOM DIMENSION
+  dimension: kingdom {
+    sql:
+      CASE
+        WHEN ${category} = 'Vascular Plant' THEN 'Plant'
+        WHEN ${category} = 'Nonvascular Plant' THEN 'Plant'
+        WHEN ${category} = 'Bird' THEN 'Animal'
+        WHEN ${category}= 'Insect' THEN 'Bugs'
+        WHEN ${category} = 'Fungi' THEN 'Fungi'
+        WHEN ${category} = 'Fish' THEN 'Animal'
+        WHEN ${category} = 'Mammal' THEN 'Animal'
+        WHEN ${category} = 'Invertebrate' THEN 'Invertebrate'
+        WHEN ${category} = 'Reptile' THEN 'Animal'
+        WHEN ${category} = 'Algae' THEN 'Plant'
+        WHEN ${category} = 'Slug/Snail' THEN 'Bugs'
+        WHEN ${category} = 'Spider/Scorpion' THEN 'Bugs'
+        WHEN ${category} = 'Amphibian' THEN 'Animal'
+        WHEN ${category} = 'Crab/Lobster/Shrimp' THEN 'Animal'
+        ELSE
+        ${category}
+       END
+      ;;
+  }
+
+# CUSTOM MEASURE
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${species_id} ;;
   }
 }

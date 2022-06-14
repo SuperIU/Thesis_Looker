@@ -16,24 +16,27 @@ view: parks {
     sql: ${TABLE}.Acres ;;
   }
 
-  dimension: relative_size {
-    description: "The amount of football fields that fit in this park"
+# CUSTOM DIMENSION
+  dimension: hectare {
+    description: "The amount of hectares of this park"
     type: number
-    sql: round(${acres}/1.32, 0) ;;
+    sql: round(${acres}*0.40468564224, 2) ;;
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_acres {
+  measure: total_hectares {
     type: sum
-    sql: ${acres} ;;
+    sql: ${hectare} ;;
+    value_format: "#,##0.00"
   }
 
-  measure: average_acres {
+  measure: average_hectare {
     type: average
-    sql: ${acres} ;;
+    sql: ${hectare} ;;
+    value_format: "#,##0.00"
   }
 
   dimension: art {
@@ -93,9 +96,9 @@ view: parks {
     <a href="/dashboards/90?={{ value | url_encode }}&Park%20Name= {{ value }}" target="_new">
     <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
     <a href="https://www.google.com/search?q={{ value }}" target="_new">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" height=15 width=15> </a> ;;
+    <img src=https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" height=15 width=12> </a> ;;
   }
-# Revisar el número de dashboard después
+
   dimension: state {
     map_layer_name: us_states
     type: string
@@ -145,6 +148,14 @@ view: parks {
     map_layer_name: us_states
   }
 
+  dimension: distance2 {
+    type: distance
+    start_location_field: get_your_location.location
+    end_location_field: location
+    units: miles
+    hidden: yes
+  }
+
   dimension: world_heritage_site {
     type: yesno
     sql: ${TABLE}.world_heritage_site ;;
@@ -153,5 +164,23 @@ view: parks {
   measure: count {
     type: count
     drill_fields: [park_name]
+  }
+
+  dimension: park_size {
+    case: {
+      when: {
+        sql: ${hectare} >= 1000000;;
+        label: "Large"
+      }
+      when: {
+        sql: ${hectare} > 100000 AND ${hectare} < 1000000 ;;
+        label: "Medium"
+      }
+      when: {
+        sql: ${hectare} <= 100000;;
+        label: "Small"
+      }
+      else: "Unknown"
+    }
   }
 }

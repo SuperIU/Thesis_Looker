@@ -65,8 +65,28 @@ explore: parks {
     sql_on: ${parks.park_name} = ${detailed_visits.park} ;;
     relationship: many_to_one
   }
+
+  join: park_climate {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${park_climate.park} ;;
+    relationship: many_to_one
+  }
+
+  join: park_species {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${park_species.park_name} ;;
+    relationship: many_to_one
+  }
+
+  join: get_your_location {
+    type:  cross
+    sql_on: ${get_your_location.state_id} = ${parks.state} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: trails {}
 
 explore: park_species {}
+
+explore: cities {}
