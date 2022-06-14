@@ -93,7 +93,7 @@ view: parks {
     sql: ${TABLE}.park_name ;;
     html:
     {{ linked_value }}
-    <a href="/dashboards/90?={{ value | url_encode }}&Park%20Name= {{ value }}" target="_new">
+    <a href="/dashboards/925?={{ value | url_encode }}&Park%20Name= {{ value }}" target="_new">
     <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
     <a href="https://www.google.com/search?q={{ value }}" target="_new">
     <img src=https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" height=15 width=12> </a> ;;
