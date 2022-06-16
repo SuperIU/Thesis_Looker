@@ -140,25 +140,18 @@ view: parks {
     }
   }
 
+  dimension: world_heritage_site {
+    type: yesno
+    sql: ${TABLE}.world_heritage_site ;;
+  }
+
   dimension: location {
     description: "Location in lat,long coordinates"
     type: location
     sql_latitude: ${latitude} ;;
     sql_longitude: ${longitude} ;;
+    drill_fields: [drill_parks*]
     map_layer_name: us_states
-  }
-
-  dimension: distance2 {
-    type: distance
-    start_location_field: get_your_location.location
-    end_location_field: location
-    units: miles
-    hidden: yes
-  }
-
-  dimension: world_heritage_site {
-    type: yesno
-    sql: ${TABLE}.world_heritage_site ;;
   }
 
   measure: count {

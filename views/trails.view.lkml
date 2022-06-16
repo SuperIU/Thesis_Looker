@@ -36,6 +36,14 @@ view: trails {
   dimension: avg_rating {
     type: number
     sql: ${TABLE}.avg_rating ;;
+    html:
+      {% for i in (1..5) %}
+      {% if i > value %}
+      ★
+      {% else %}
+      <font color="orange">★</font>
+      {% endif %}
+      {% endfor %};;
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
@@ -50,6 +58,14 @@ view: trails {
   measure: average_avg_rating {
     type: average
     sql: ${avg_rating} ;;
+    html:
+      {% for i in (1..5) %}
+      {% if i > value %}
+      ★
+      {% else %}
+      <font color="orange">★</font>
+      {% endif %}
+      {% endfor %};;
   }
 
   dimension: city_name {
@@ -65,6 +81,15 @@ view: trails {
   dimension: difficulty_rating {
     type: number
     sql: ${TABLE}.difficulty_rating ;;
+    html:
+      {% for i in (1..7) %}
+      {% if i > value %}
+      ★
+      {% else %}
+      <font color="orange">★</font>
+      {% endif %}
+      {% endfor %};;
+
   }
 
   dimension: elevation_gain {

@@ -25,21 +25,37 @@ persist_with: balcazar_thesis_national_parks_default_datagroup
 # Typically, join parameters require that you define the join type, join relationship, and a sql_on clause.
 # Each joined view also needs to define a primary key.
 
-explore: detailed_weather {}
+explore: detailed_weather {
+  hidden:  yes
+  }
 
-explore: detailed_visits {}
+explore: detailed_visits {
+  hidden:  yes
+  }
 
-explore: climbing {}
+explore: climbing {
+  hidden:  yes
+  }
 
-explore: park_climate {}
+explore: park_climate {
+  hidden:  yes
+}
 
-explore: guides {}
+explore: guides {
+  hidden:  yes
+}
 
-explore: park_noaa_stations {}
+explore: park_noaa_stations {
+  hidden:  yes
+}
 
-explore: monthly_visits {}
+explore: monthly_visits {
+  hidden:  yes
+}
 
-explore: detailed_climate {}
+explore: detailed_climate {
+  hidden:  yes
+}
 
 explore: parks {
   join: guides {
@@ -72,21 +88,23 @@ explore: parks {
     relationship: many_to_one
   }
 
+  join: trails {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${trails.area_name} ;;
+    relationship: many_to_one
+  }
+
   join: park_species {
     type: left_outer
     sql_on: ${parks.park_name} = ${park_species.park_name} ;;
     relationship: many_to_one
   }
-
-  join: get_your_location {
-    type:  cross
-    sql_on: ${get_your_location.state_id} = ${parks.state} ;;
-    relationship: many_to_one
-  }
 }
 
-explore: trails {}
+explore: trails {
+  hidden: yes
+}
 
-explore: park_species {}
-
-explore: cities {}
+explore: park_species {
+  hidden:  yes
+}
