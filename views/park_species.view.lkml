@@ -71,10 +71,10 @@ view: park_species {
     type: string
     sql: ${TABLE}.Scientific_Name ;;
     html:
-    {{ linked_value }}
+    {{linked_value}}
     <a href="https://www.google.com/search?q={{ value }}" target="_new">
-    <img scr="https://www.pngitem.com/pimgs/m/109-1099315_deer-deer-icon-png-transparent-png.png" height=15 width=12> </a> ;;
-    }
+    <img scr="https://upload.wikimedia.org/wikipedia/commons/f/fb/Zebra_Icon.svg" height=12 width=12> </a> ;;
+  }
 
   dimension: sci_name_formatted {
     hidden:  yes
