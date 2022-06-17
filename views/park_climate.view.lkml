@@ -95,6 +95,60 @@ view: park_climate {
     sql: ${TABLE}.month ;;
   }
 
+  dimension: month_custom{
+  case: {
+    when: {
+      sql: ${park_climate.month} in ('January') ;;
+      label: "01 January"
+    }
+    when: {
+      sql: ${park_climate.month} in ('February') ;;
+      label: "02 February"
+    }
+    when: {
+      sql: ${park_climate.month} in ('March') ;;
+      label: "03 March"
+    }
+    when: {
+      sql: ${park_climate.month} in ('April') ;;
+      label: "04 April"
+    }
+    when: {
+      sql: ${park_climate.month} in ('May') ;;
+      label: "05 May"
+    }
+    when: {
+      sql: ${park_climate.month} in ('June') ;;
+      label: "06 June"
+    }
+    when: {
+      sql: ${park_climate.month} in ('July') ;;
+      label: "07 July"
+    }
+    when: {
+      sql: ${park_climate.month} in ('August') ;;
+      label: "08 August"
+    }
+    when: {
+      sql: ${park_climate.month} in ('September') ;;
+      label: "09 September"
+    }
+    when: {
+      sql: ${park_climate.month} in ('October') ;;
+      label: "10 October"
+    }
+    when: {
+      sql: ${park_climate.month} in ('November') ;;
+      label: "11 November"
+    }
+    when: {
+      sql: ${park_climate.month} in ('December') ;;
+      label: "12 December"
+    }
+    else: "Unknown"
+  }
+  }
+
   dimension: park {
     type: string
     sql: ${TABLE}.park ;;
