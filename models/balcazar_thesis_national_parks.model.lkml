@@ -99,6 +99,12 @@ explore: parks {
     sql_on: ${parks.park_name} = ${park_species.park_name} ;;
     relationship: many_to_one
   }
+
+  join: climb_trail {
+    type: left_outer
+    sql_on: ${parks.park_name} = ${climb_trail.park_name} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: trails {
@@ -107,4 +113,8 @@ explore: trails {
 
 explore: park_species {
   hidden:  yes
+}
+
+explore: climb_trail {
+  hidden: yes
 }
