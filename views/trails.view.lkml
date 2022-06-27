@@ -23,6 +23,37 @@ view: trails {
     sql: ${TABLE}._geoloc ;;
   }
 
+  dimension: lat1 {
+    hidden:  yes
+    type: string
+    sql: split(${TABLE}._geoloc, ", 'lng") [SAFE_OFFSET(0)];;
+  }
+
+  dimension: lat2 {
+    hidden: yes
+    type: number
+    sql: split(${lat1}, "{'lat': ") [SAFE_OFFSET(1)] ;;
+  }
+
+  dimension: lng1 {
+    hidden: yes
+    type: string
+    sql: split(${TABLE}._geoloc, "lng': ") [SAFE_OFFSET(1)] ;;
+  }
+
+  dimension: lng2 {
+    hidden: yes
+    type: number
+    sql: split(${lng1}, "}") [SAFE_OFFSET(0)] ;;
+  }
+
+  dimension: trail_loc {
+    type: location
+    sql_latitude: ${lat2} ;;
+    sql_longitude: ${lng2} ;;
+    map_layer_name: us_states
+  }
+
   dimension: activities {
     type: string
     sql: ${TABLE}.activities ;;
